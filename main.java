@@ -7,8 +7,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.net.MalformedURLException;
-import org.jsoup.*;
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 public class main 
 {
@@ -18,117 +20,167 @@ public class main
 		
 		ConfigurationBuilder cb = new ConfigurationBuilder();
 		cb.setDebugEnabled(true)
-			.setOAuthConsumerKey("PpAmXRWYREfx0RW7hDTZmG7Mn")
-			.setOAuthConsumerSecret("thS7IICHAGcaKdjsfM32slX66WFD1LNC2vvk6y9o6QfRZSU582")
-			.setOAuthAccessToken("805495253469757440-MGSTzgeWhUFOZKQIBPX9o0qPPh5elnf")
-			.setOAuthAccessTokenSecret("otIvyioCf58H7PKbpgj8tfjROfVKUeQQFSqP3eB44OMkE");
-		
-		
+			.setOAuthConsumerKey("pi7ymebgkpuhst3lC3aEQflyk")
+			.setOAuthConsumerSecret("JRgVJm2A5ycsjPOhBvFZEU0WrG6gB2YuuA2FRIpGZinaGnIYRy")
+			.setOAuthAccessToken("595124178-lWLnqxYxoh7Usm9Eis7Wh8wagePJ2ZnAjFclDPCy")
+			.setOAuthAccessTokenSecret("VDT9l58yIMfHVG5ccBBzgBlBfNZhZ2mfhj4DHGICpVQV3")
+			/* I added this because some tweets are longer than 140 characters due to retweets
+			 * Sometimes the links are at the end of the tweet so we need to make sure that we get the whole tweet.
+			 */
+			.setTweetModeExtended(true); 
 		
 		StatusListener listener = new StatusListener() {
             @Override
             public void onStatus(Status status) {
             	
-//            	if(status.getLang().contains("en") && status.getPlace() != null && !status.getPlace().getCountry().contains("?"))
-            	if(status.getLang().contains("en")) // && status.getGeoLocation() != null 
-        		//filters out non english tweets and non geolocated tweets
+            	if(status.getLang().contains("en"))
+        		//filters out non english tweets
             	{
-	            	String tw = status.getText();
-	            	String tw2 = tw;
-	            	int index = 0;
-	            	String hyperlink = "";
-	            	String hashtag = "";
-	            	String otherUser = "";
-	            	String author = status.getUser().getScreenName();
-	            	List <String> links = new ArrayList<String>(); 
-	            	List <String> hashtags = new ArrayList<String>();
-	            	List <String> ats = new ArrayList<String>();
+	            	System.out.println("-------------------------------------Paring the Tweet with Twitter4J------------------------------------");
+	            	System.out.println(status.getUser().getScreenName() + " : " + status.getText());
+	            	//Fetches all URLs within the tweet and prints them
+	            	URLEntity[] urlList = status.getURLEntities();
+	            	for(int i = 0; i < urlList.length; i++) {
+	            		System.out.println("	URL " + (i+1) + ": " + urlList[i].getExpandedURL());
+	            	}
+	            	//Fetches all Hashtags within the tweet and prints them
+	            	HashtagEntity[] hashtagList = status.getHashtagEntities();
+	            	for(int i = 0; i < hashtagList.length; i++) {
+	            		System.out.println("	Hashtag " + (i+1) + ": " + hashtagList[i].getText());
+	            	}
+	            	//Fetches all User mentions within the tweet and prints them
+	            	UserMentionEntity[] userList = status.getUserMentionEntities();
+	            	for(int i = 0; i < userList.length; i++) {
+	            		System.out.println("	User " + (i+1) + ": " + userList[i].getText());
+	            	}
+	            	//Fetches all media within a tweet (video, gif, picture etc.) and prints them
+	            	MediaEntity[] mediaList = status.getMediaEntities();
+	            	for(int i = 0; i < mediaList.length; i++) {
+	            		System.out.println("	Media " + (i+1) + " type : " + mediaList[i].getType() + " - " + mediaList[i].getExpandedURL());
+	            	}
 	            	
-	            	System.out.println(status.getUser().getName() + " : " + status.getText());
+	            	for(int i = 0; i < urlList.length; i++) {
+		            	try 
+	            		{
+	            			URL url = new URL(urlList[i].getExpandedURL());
+	            			if(url.getHost() != null)
+	            			{
+	            				Document doc, doc2;
+	            				try	{
+	            					System.out.println("	-----------------Fetching URL titles with Jsoup----------------");
+	            					System.out.println("URL: " + urlList[i].getExpandedURL()); 
+	            					//Twitter uses a shorten URL i.e. http://t.co/rAndOmStUFf , so we need to ge the actual URL
+	            					doc = Jsoup.connect(urlList[i].getExpandedURL()).get();
+	            					String title = doc.title();//finds the title within the page
+	            					System.out.println("	title: " + title);
+	            				}
+	            				catch(Exception e)
+	        					{System.err.println("Unable to connect using Jsoup.");}
+	            			}
+	            		}
+	            		catch(MalformedURLException e) 
+	            			{System.err.println("Unable to fetch URL.");}
+	            	}
+	            	System.out.println("");	
 	            	
-            		System.out.println("@" + author + " - " + tw);
+//	            	String tw = status.getText();
+//	            	String tw2 = tw;
+//	            	int index = 0;
+//	            	String hyperlink = "";
+//	            	String hashtag = "";
+//	            	String otherUser = "";
+//	            	String author = status.getUser().getScreenName();
+//	            	List <String> links = new ArrayList<String>(); 
+//	            	List <String> hashtags = new ArrayList<String>();
+//	            	List <String> ats = new ArrayList<String>();
+//            		System.out.println("@" + author + " - " + tw);
 //            		System.out.println("      " + status.getGeoLocation());
 //            		double latitude = status.getGeoLocation().getLatitude();
 //            		double longitude = status.getGeoLocation().getLongitude();
-	            	while(tw2.length() > 0) 		//parses the tweet
-	            	{
-	            		int h = 	tw2.indexOf("http");
-	            		int amp = 	tw2.indexOf("#");
-	            		int at = 	tw2.indexOf("@");
-	            		if (h == -1)
-	            			h = 1000;
-	            		if(amp == -1)
-	            			amp = 1000;
-	            		if(at == -1)
-	            			at = 1000;
-	            		
-	            		if(h < amp && h < at ) //link
-	            		{
-	            			index = tw2.length();
-	            			if(tw2.substring(h).contains(" "))
-	            				index = tw2.indexOf(" ", h);
-	            			hyperlink = tw2.substring(h, index);
-		            		try 
-		            		{
-		            			URL url = new URL(hyperlink);
-		            			if(url.getHost() != null)
-		            			{
-		            				Document doc;
-		            				try	{
-		            					doc = Jsoup.connect(hyperlink).get();
-		            					links.add(doc.title());
-		            					System.out.println("	link: " + doc.title());
-		            					/*
-		            					 * I parsed the title in a previous iteration
-		            					 * Check the bottom of the file for an example
-		            					 * Although there might be a better way using jsoup
-		            					 */
-		            				}
-		            				catch(Exception e)
-	            					{System.err.println("Unable to connect using Jsoup.");}
-		            			}
-		            		}
-		            		catch(MalformedURLException e) 
-		            			{System.err.println("Unable to fetch URL.");}
-		            		
-		            		tw2 = tw2.substring(index,tw2.length());
-	            		}
-	            		else if(amp < at ) 		//#
-	            		{
-	            			index = tw2.length();
-	            			if(tw2.substring(amp).contains(" "))
-	            				index = tw2.indexOf(" ", amp);
-	            			if( (amp+1) != index)				// this is to prevent a non hashtag # from being added
-	            			{	
-		            			hashtag = tw2.substring(amp, index);
-			            		hashtags.add(hashtag);
-			            		tw2 = tw2.substring(index,tw2.length());
-	            			}
-	            		}
-	            		else if(at < amp)		//@
-	            		{
-	            			index = tw2.length();
-	            			if(tw2.substring(at).contains(" "))
-	            				index = tw2.indexOf(" ", at);
-	            			if( (at+1) != index)				// this is to prevent a non @<user> @ from being added
-	            			{
-		            			otherUser = tw2.substring(at, index);
-			            		ats.add(otherUser);
-			            		tw2 = tw2.substring(index,tw2.length());
-	            			}
-	            		}
-	            		else if(h == amp && amp == at && amp == 1000)
-	            			break;
-	            		else
-	            			System.err.println("Error with parsing/index of substrings");
-	            	}
+//	            	while(tw2.length() > 0) 		//parses the tweet
+//	            	{
+//	            		int h = 	tw2.indexOf("http");
+//	            		int amp = 	tw2.indexOf("#");
+//	            		int at = 	tw2.indexOf("@");
+//	            		if (h == -1)
+//	            			h = 1000;
+//	            		if(amp == -1)
+//	            			amp = 1000;
+//	            		if(at == -1)
+//	            			at = 1000;
+//	            		
+//	            		if(h < amp && h < at ) //link
+//	            		{
+//	            			index = tw2.length();
+//	            			if(tw2.substring(h).contains(" "))
+//	            				index = tw2.indexOf(" ", h);
+//	            			hyperlink = tw2.substring(h, index);
+//		            		try 
+//		            		{
+//		            			URL url = new URL(hyperlink);
+//		            			if(url.getHost() != null)
+//		            			{
+//		            				Document doc, doc2;
+//		            				try	{
+////		            					System.out.println(hyperlink);
+//		            					doc = Jsoup.connect(hyperlink).get();
+//		            					doc2 = Jsoup.connect(doc.title()).get();
+////		            					links.add(doc.title());
+////		            					Elements head = doc.head().getElementsByTag("title");
+////		            					String title = doc.title();
+////		            					System.out.println("title:" + doc.title());
+////		            					System.out.println("	title: " + doc2.title());
+//		            					/*
+//		            					 * I parsed the title in a previous iteration
+//		            					 * Check the bottom of the file for an example
+//		            					 * Although there might be a better way using jsoup
+//		            					 */
+//		            				}
+//		            				catch(Exception e)
+//	            					{System.err.println("Unable to connect using Jsoup.");}
+//		            			}
+//		            		}
+//		            		catch(MalformedURLException e) 
+//		            			{System.err.println("Unable to fetch URL.");}
+//		            		
+//		            		tw2 = tw2.substring(index,tw2.length());
+//	            		}
+//	            		else if(amp < at ) 		//#
+//	            		{
+//	            			index = tw2.length();
+//	            			if(tw2.substring(amp).contains(" "))
+//	            				index = tw2.indexOf(" ", amp);
+//	            			if( (amp+1) != index)				// this is to prevent a non hashtag # from being added
+//	            			{	
+//		            			hashtag = tw2.substring(amp, index);
+//			            		hashtags.add(hashtag);
+//			            		tw2 = tw2.substring(index,tw2.length());
+//	            			}
+//	            		}
+//	            		else if(at < amp)		//@
+//	            		{
+//	            			index = tw2.length();
+//	            			if(tw2.substring(at).contains(" "))
+//	            				index = tw2.indexOf(" ", at);
+//	            			if( (at+1) != index)				// this is to prevent a non @<user> @ from being added
+//	            			{
+//		            			otherUser = tw2.substring(at, index);
+//			            		ats.add(otherUser);
+//			            		tw2 = tw2.substring(index,tw2.length());
+//	            			}
+//	            		}
+//	            		else if(h == amp && amp == at && amp == 1000)
+//	            			break;
+//	            		else
+//	            			System.err.println("Error with parsing/index of substrings");
+//	            	}
             
-	            	if(links.size() > 0)
-	            		System.out.println("      Links " + links);
-	            	if(hashtags.size() > 0)
-	            		System.out.println("      Hashtags " + hashtags);
-	            	if(ats.size() > 0)
-	            		System.out.println("      Ats " + ats);
+//	            	if(links.size() > 0)
+//	            		System.out.println("      Links " + links);
+//	            	if(hashtags.size() > 0)
+//	            		System.out.println("      Hashtags " + hashtags);
+//	            	if(ats.size() > 0)
+//	            		System.out.println("      Ats " + ats);
 	            	
 //	            	String loc = status.getPlace().getFullName();
 //	            	String city = status.getPlace().getName();
@@ -190,7 +242,7 @@ public class main
 	}
 }
 
-//while(tw2.contains("http") && !tw2.contains("…") ) 		//… caused an infinite loop
+//while(tw2.contains("http") && !tw2.contains("â€¦") ) 		//â€¦ caused an infinite loop
 //{
 //	linkIndex = tw2.indexOf("http");
 //	if(tw2.substring(linkIndex).contains(" "))
