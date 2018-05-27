@@ -51,7 +51,7 @@ public class index2
 			JSONParser parser = new JSONParser();
 			try
 			{
-				String filePath = "tweets/num"+i+".json";
+				String filePath = "tweets/numY"+i+".json";
 				System.out.println("Reading " + filePath);
 				JSONArray a = (JSONArray) parser.parse(new FileReader(filePath));
 				for(Object o : a)
@@ -68,13 +68,14 @@ public class index2
 		            indexWriter.addDocument(doc);
 	
 				}
-				indexWriter.close();
+				
 			}
 			catch (ParseException e)
 			{
 				e.printStackTrace();
 			}
         }
+        indexWriter.close();
 		
 		
 		// Now search the index:
@@ -88,7 +89,7 @@ public class index2
         boosts.put(fields[2], .75f);
         //addjust these 
        	MultiFieldQueryParser parser2 = new MultiFieldQueryParser(fields, analyzer, boosts);
-       	Query query = parser2.parse("Billboard");
+       	Query query = parser2.parse("cute");
        	int topHitCount = 100;
         ScoreDoc[] hits = indexSearcher.search(query, topHitCount).scoreDocs;
 		
