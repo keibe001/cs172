@@ -1,0 +1,14 @@
+<input #searchBox id="search-box"
+(keyup.enter)="search(searchBox.value)"/>
+<button (click)="search(searchBox.value)">Search</button>
+
+<h2>Relevant Tweets:</h2>
+<ul class="tweets" *ngIf="tweets">
+  <li *ngFor="let tweet of tweets">
+    <span class="badge">{{tweet.id}}</span>
+    {{tweet.user | uppercase}}<span>: </span>
+    {{tweet.text}}
+  </li>
+</ul>
+
+<h4 *ngIf="lastSearch">Last search query: <i>"{{lastSearch}}"</i></h4>
