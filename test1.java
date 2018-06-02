@@ -11,93 +11,114 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-
+import java.util.concurrent.TimeUnit;
 
 
 
 public class test1 implements Runnable 
 {
 	
-
-	private String JSONLocation;
-	public test1(String JSONLocation)
+	private int seed;
+	public test1(int seed)
 	{
-		this.JSONLocation = JSONLocation;
+		this.seed = seed;
 	}
 	
 
 	@SuppressWarnings("unchecked")
 	public void run() 
 	{
-		JSONParser parser = new JSONParser();
-		try
+		int filecount = seed;
+		while(true)
 		{
-			String filePath = JSONLocation;
-			System.out.println("Reading " + filePath);
-			ArrayList<String> tweetlist = new ArrayList<String>();
-			org.json.simple.JSONArray a = (org.json.simple.JSONArray) parser.parse(new FileReader(filePath));
-			for(Object o : a)
+			String filePath = "tweets/conn/num" + filecount + ".json";
+			while(true)
 			{
-				JSONObject tweet = (JSONObject) o;
-				String urlList = (String) tweet.get("url title");
-				ArrayList<String> titles = new ArrayList<String>();
-				if (urlList.length() > 2)
+				File check = new File(filePath);
+				if (check.exists())
 				{
-					String array[] = urlList.split("\"");
-					for(int i = 0; i < array.length; i++)
-					{
-						if (!array[i].equals( "[") && !array[i].equals( "]") && !array[i].equals(","))
-							try 
-							{
-								URL url = new URL (array[i]);
-								if (url.getHost() != null)
-								{
-									Document doc;
-									try
-									{
-										doc = Jsoup.connect(array[i]).get();
-										titles.add(doc.title());
-										
-									}
-									catch (Exception e) 
-									{/*System.err.println(" Failed to Fetch title");*/}
-								}
-							}
-							catch (MalformedURLException e)
-							{}
+//					System.out.println("Leaving if statement with " + filePath);
+					break;
+				}
+				else
+					try {
+//						TimeUnit.SECONDS.sleep(2);
+						TimeUnit.MINUTES.sleep(2);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
 					}
-					
-				}
-				tweet.put("titles", titles);
-				tweetlist.add(tweet.toString());
 			}
-			try {
-				String filename = filePath.substring(0, 10) + "Y" + filePath.substring(11);
-				System.out.println("Writing to " + filename);
-        		File file = new File(filename);
-				FileWriter fw = new FileWriter(file);
-				fw.write("[");
-				fw.flush();
-				for(int i = 0; i < tweetlist.size(); i++) {
-					fw.write(tweetlist.get(i));
-					if (i != tweetlist.size()-1)
-						fw.write(",");
-					fw.flush();
+			JSONParser parser = new JSONParser();
+			try
+			{
+				
+				System.out.println("    Thread(" +seed+ ") Reading " + filePath);
+				ArrayList<String> tweetlist = new ArrayList<String>();
+				org.json.simple.JSONArray a = (org.json.simple.JSONArray) parser.parse(new FileReader(filePath));
+				for(Object o : a)
+				{
+					JSONObject tweet = (JSONObject) o;
+					String urlList = (String) tweet.get("url title");
+					ArrayList<String> titles = new ArrayList<String>();
+					if (urlList.length() > 2)
+					{
+						String array[] = urlList.split("\"");
+						for(int i = 0; i < array.length; i++)
+						{
+							if (!array[i].equals( "[") && !array[i].equals( "]") && !array[i].equals(","))
+								try 
+								{
+									URL url = new URL (array[i]);
+									if (url.getHost() != null)
+									{
+										Document doc;
+										try
+										{
+											doc = Jsoup.connect(array[i]).get();
+											titles.add(doc.title());
+											
+										}
+										catch (Exception e) 
+										{/*System.err.println(" Failed to Fetch title");*/}
+									}
+								}
+								catch (MalformedURLException e)
+								{}
+						}
+						
+					}
+					tweet.put("titles", titles);
+					tweetlist.add(tweet.toString());
 				}
-				fw.write("]");
-				fw.flush();
-				fw.close();
-			} catch (IOException e) {
+				try {
+					String filename = "tweets/conn/numZ" + filecount + ".json";
+					filecount+=2;
+					System.out.println("    Thread("+seed + ") Writing to " + filename);
+	        		File file = new File(filename);
+					FileWriter fw = new FileWriter(file);
+					fw.write("[");
+					fw.flush();
+					for(int i = 0; i < tweetlist.size(); i++) {
+						fw.write(tweetlist.get(i));
+						if (i != tweetlist.size()-1)
+							fw.write(",");
+						fw.flush();
+					}
+					fw.write("]");
+					fw.flush();
+					fw.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			catch (IOException e)
+			{
 				e.printStackTrace();
 			}
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-		catch (ParseException e)
-		{
-			e.printStackTrace();
+			catch (ParseException e)
+			{
+				e.printStackTrace();
+			}
 		}
     	
 	}
@@ -115,14 +136,14 @@ public class test1 implements Runnable
 			StatusListener listener = new StatusListener() 
 			{
 				int lines = 0;
-				int filecount = 0;
+				int filecount = 0; 										//changed
 				ArrayList<String> tweetlist = new ArrayList<String>();
 	            @SuppressWarnings("unchecked")
 				public void onStatus(Status status) 
 	            {
 	            	if(status.getLang().contains("en")) {
 	                	lines++;
-	                	
+
 		            	JSONArray users, hashtags, titles;
 		            	JSONObject tweet = new JSONObject();
 		            	boolean hasGeo = false;
@@ -175,16 +196,18 @@ public class test1 implements Runnable
 //							tweet.put("urls", urlList);
 						tweet.put("url title", titles.toString());
 						tweet.put("text", text);
+						tweet.put("date", status.getCreatedAt().toString());
 						if(hasGeo == true) {
 							tweet.put("state", status.getPlace().getFullName());
 							tweet.put("country", status.getPlace().getCountry());
 							tweet.put("lat", status.getGeoLocation().getLatitude());
 							tweet.put("long", status.getGeoLocation().getLongitude());
 						}
-//		            	System.out.print(lines);
-//		            	System.out.println(tweet.toString());
-		            	
-		            	int filesize = 100;
+
+		          
+	                	if (lines%1000 == 0 || lines < 100)
+	                		System.out.println(lines + tweet.toString());
+		            	int filesize = 20000;
 		            	if (lines%filesize == 1)
 		            		tweetlist.add("[" +tweet.toString() + ",\n");
 		            	else if (lines%filesize ==0)
@@ -193,7 +216,8 @@ public class test1 implements Runnable
 		            		tweetlist.add(tweet.toString() + ",\n");
 		            	
 		            	if(lines%filesize == 0) {
-		        			String filename = "tweets/numX" + filecount + ".json";
+		        			String filename = "tweets/conn/num" + filecount + ".json";
+		        			System.out.println("Writing to " + filename);
 		                	try {
 		                		File file = new File(filename);
 								FileWriter fw = new FileWriter(file);
@@ -209,7 +233,6 @@ public class test1 implements Runnable
 							}
 		                	tweetlist.clear();
 		                	filecount++;
-		                	(new Thread(new test2(filename))).start();
 		            	}
 		            	
 	            	}
@@ -243,6 +266,8 @@ public class test1 implements Runnable
 	        };
 			    TwitterStream twitterStream = new TwitterStreamFactory(cb.build()).getInstance();
 			    twitterStream.addListener(listener);
+			    (new Thread(new test1(0))).start();
+			    (new Thread(new test1(1))).start();
 			    // sample() method internally creates a thread which manipulates TwitterStream and calls these adequate listener methods continuously.
 			    twitterStream.sample();
 			}
