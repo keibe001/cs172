@@ -42,7 +42,7 @@ import java.util.Map;
 
 public class index2
 {
-
+	//test
 
 	public static void main(String[] args) throws IOException, org.apache.lucene.queryparser.classic.ParseException
 	{
@@ -55,8 +55,8 @@ public class index2
         IndexWriterConfig config = new IndexWriterConfig(analyzer).setOpenMode(OpenMode.CREATE);
         IndexWriter indexWriter = new IndexWriter(directory, config);
 
-        int numFiles = 2;
-        for(int i = 0; i < numFiles; i++)
+        int numFiles = 120;
+        for(int i = 115; i < numFiles; i++)
         {
 			JSONParser parser = new JSONParser();
 			try
@@ -121,34 +121,34 @@ public class index2
         indexWriter.close();
 
 
-		// Now search the index:
-        DirectoryReader indexReader = DirectoryReader.open(directory);
-        IndexSearcher indexSearcher = new IndexSearcher(indexReader);
-
-		String[] fields = {"Name", "UserName", "Text", "Hashtags"}; //Add the fields here
-        Map<String, Float> boosts = new HashMap<>();
-        boosts.put(fields[0],  .75f);
-        boosts.put(fields[1], .75f);
-        boosts.put(fields[2],  1.0f);
-        boosts.put(fields[3],  1.5f);
-        //adjust these
-       	MultiFieldQueryParser parser2 = new MultiFieldQueryParser(fields, analyzer, boosts);
-       	Query query = parser2.parse("i");
-       	int topHitCount = 100;
-
-//       	Sort sort = new Sort(SortField.FIELD_SCORE, new SortField("Date", SortField.Type.STRING));
-        ScoreDoc[] hits = indexSearcher.search(query, topHitCount).scoreDocs;
-
-
-        // Iterate through the results:
-        for (int rank = 0; rank < hits.length; ++rank) {
-            Document hitDoc = indexSearcher.doc(hits[rank].doc);
-            System.out.println((rank + 1) + " (score:" + hits[rank].score + ") " + hitDoc.get("Date") + " --> " +
-                               hitDoc.get("Name") + " - " + hitDoc.get("Text"));
-            // System.out.println(indexSearcher.explain(query, hits[rank].doc));
-        }
-        indexReader.close();
-        directory.close();
+//		// Now search the index:
+//        DirectoryReader indexReader = DirectoryReader.open(directory);
+//        IndexSearcher indexSearcher = new IndexSearcher(indexReader);
+//
+//		String[] fields = {"Name", "UserName", "Text", "Hashtags"}; //Add the fields here
+//        Map<String, Float> boosts = new HashMap<>();
+//        boosts.put(fields[0],  .75f);
+//        boosts.put(fields[1], .75f);
+//        boosts.put(fields[2],  1.0f);
+//        boosts.put(fields[3],  1.5f);
+//        //adjust these
+//       	MultiFieldQueryParser parser2 = new MultiFieldQueryParser(fields, analyzer, boosts);
+//       	Query query = parser2.parse("i");
+//       	int topHitCount = 100;
+//
+////       	Sort sort = new Sort(SortField.FIELD_SCORE, new SortField("Date", SortField.Type.STRING));
+//        ScoreDoc[] hits = indexSearcher.search(query, topHitCount).scoreDocs;
+//
+//
+//        // Iterate through the results:
+//        for (int rank = 0; rank < hits.length; ++rank) {
+//            Document hitDoc = indexSearcher.doc(hits[rank].doc);
+//            System.out.println((rank + 1) + " (score:" + hits[rank].score + ") " + hitDoc.get("Date") + " --> " +
+//                               hitDoc.get("Name") + " - " + hitDoc.get("Text"));
+//            // System.out.println(indexSearcher.explain(query, hits[rank].doc));
+//        }
+//        indexReader.close();
+//        directory.close();
 	}
 
 }
