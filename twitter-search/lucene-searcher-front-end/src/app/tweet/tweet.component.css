@@ -12,11 +12,11 @@
   .tweets li {
     cursor: pointer;
     position: relative;
-    left: 0;
+    left: 0.7em;
     background-color: #EEE;
     margin: .5em;
     padding: .3em 0;
-    height: 1.6em;
+    height: 3.2;
     border-radius: 4px;
   }
   .tweets li.selected:hover {

@@ -65,12 +65,12 @@ public class TweetController {
         Analyzer analyzer = new StandardAnalyzer();
         String name = System.getProperty("user.name");
         // Now search the index:
-        Directory directory = FSDirectory.open(Paths.get("/home/"+name+"/Documents/indexTweets"));
+        Directory directory = FSDirectory.open(Paths.get("/home/jiqingjerry/Documents/indexTweets"));
         DirectoryReader indexReader = DirectoryReader.open(directory);
 
         IndexSearcher indexSearcher = new IndexSearcher(indexReader);
 
-        String[] fields = {"Name", "UserName", "Text"}; //Add the fields here
+        String[] fields = {"Name", "UserName", "Text", "Hashtags"}; //Add the fields here
 
        	int topHitCount = 20;
         //Sort sort = new Sort(SortField.FIELD_SCORE, new SortField("Date", SortField.Type.STRING));
@@ -81,9 +81,10 @@ public class TweetController {
         // }
 
         Map<String, Float> boosts = new HashMap<>();
-        boosts.put(fields[0], 1.0f);
-        boosts.put(fields[1], 1.0f);
-        boosts.put(fields[2], .75f);
+        boosts.put(fields[0], .75f);
+        boosts.put(fields[1], .75f);
+        boosts.put(fields[2], 1.0f);
+        boosts.put(fields[3], 1.5f);
         //adjust these
        	MultiFieldQueryParser parser2 = new MultiFieldQueryParser(fields, analyzer, boosts);
        	Query q = parser2.parse(query);
@@ -93,7 +94,7 @@ public class TweetController {
         // tweets = new ArrayList<>();
         for (int rank = 0; rank < hits.length; ++rank) {
             Document hitDoc = indexSearcher.doc(hits[rank].doc);
-            matches.add(new Tweet((rank+1), hitDoc.get("UserName"), hitDoc.get("Text")));
+            matches.add(new Tweet((rank+1), hitDoc.get("Name"), hitDoc.get("Text"), hitDoc.get("Hashtags")));
             // System.out.println((rank + 1) + " (score:" + hits[rank].score + ") " + hitDoc.get("Date") + " --> " +
             //                    hitDoc.get("Name") + " - " + hitDoc.get("Text"));
             // System.out.println(indexSearcher.explain(query, hits[rank].doc));

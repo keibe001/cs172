@@ -5,13 +5,15 @@ public class Tweet {
     public int id;
     public String user;
     public String text;
+    public String hashtag;
 
     public Tweet(){}
 
-    public Tweet(int id, String user, String text) {
+    public Tweet(int id, String user, String text, String hashtag) {
         this.id = id;
         this.user = user;
         this.text = text;
+        this.hashtag = hashtag;
     }
 
     public int getId() {
@@ -38,8 +40,16 @@ public class Tweet {
         this.text = text;
     }
 
+    public String getHashtag() {
+        return hashtag;
+    }
+
+    public void setHashtag(String hashtag) {
+        this.hashtag = hashtag;
+    }
+
     @Override
     public String toString() {
-        return String.format("Tweet[id=%d, user=%s, text=%s]", id, user, text);
+        return String.format("Tweet[id=%d, user=%s, text=%s, hashtag=%s]", id, user, text, hashtag);
     }
 }
