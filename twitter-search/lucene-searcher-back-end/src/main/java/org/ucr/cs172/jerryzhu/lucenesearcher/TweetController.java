@@ -65,7 +65,7 @@ public class TweetController {
         Analyzer analyzer = new StandardAnalyzer();
         String name = System.getProperty("user.name");
         // Now search the index:
-        Directory directory = FSDirectory.open(Paths.get("/home/jiqingjerry/Documents/indexTweets"));
+        Directory directory = FSDirectory.open(Paths.get("/home/"+name+"/Documents/indexTweets"));
         DirectoryReader indexReader = DirectoryReader.open(directory);
 
         IndexSearcher indexSearcher = new IndexSearcher(indexReader);

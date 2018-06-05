@@ -42,8 +42,34 @@ import java.util.Map;
 
 public class index2
 {
-	//test
+	static class Pair implements Comparable<Pair> {
+	    public final int index;
+	    public final float value;
 
+	    public Pair(int index, float value) {
+	        this.index = index;
+	        this.value = value;
+	    }
+
+	    @Override
+	    public int compareTo(Pair other) {
+	        //multiplied to -1 as the author need descending sort order
+	        return -1 * Float.valueOf(this.value).compareTo(other.value);
+	    }
+	}
+	public static int julianDay(int year, int month, int day) {
+		  int a = (14 - month) / 12;
+		  int y = year + 4800 - a;
+		  int m = month + 12 * a - 3;
+		  int jdn = day + (153 * m + 2)/5 + 365*y + y/4 - y/100 + y/400 - 32045;
+		  return jdn;
+		}
+	public static int diff(int y1, int m1, int d1, int y2, int m2, int d2) {
+		  return julianDay(y1, m1, d1) - julianDay(y2, m2, d2);
+		}
+
+
+	@SuppressWarnings("deprecation")
 	public static void main(String[] args) throws IOException, org.apache.lucene.queryparser.classic.ParseException
 	{
 		Analyzer analyzer = new StandardAnalyzer();
@@ -55,8 +81,8 @@ public class index2
         IndexWriterConfig config = new IndexWriterConfig(analyzer).setOpenMode(OpenMode.CREATE);
         IndexWriter indexWriter = new IndexWriter(directory, config);
 
-        int numFiles = 120;
-        for(int i = 115; i < numFiles; i++)
+        int numFiles = 1;
+        for(int i = 0; i < numFiles; i++)
         {
 			JSONParser parser = new JSONParser();
 			try

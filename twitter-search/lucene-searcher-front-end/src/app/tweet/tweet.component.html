@@ -5,7 +5,7 @@
 <h2>Relevant Tweets:</h2>
 <ul class="tweets" *ngIf="tweets">
   <li *ngFor="let tweet of tweets">
-    <span class="badge">{{tweet.id}}</span>
+    <span class="badge">{{tweet.user}}</span>
     {{tweet.user | uppercase}}<span>: </span>
     {{tweet.text}}
   </li>

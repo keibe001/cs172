@@ -122,7 +122,7 @@ public class test1 implements Runnable
 				public void onStatus(Status status) {
 	            	if(status.getLang().contains("en")) {
 	                	lines++;
-	                	if(lines%100 == 0) {
+	                	if(lines%1000 == 0) {
 	                		System.out.println(lines);
 	                	}
 		            	JSONArray users, hashtags, titles;
@@ -130,7 +130,7 @@ public class test1 implements Runnable
 		            	boolean hasGeo = false;
 
 		            	String text = status.getText();
-
+		            	
 
 		            	//Fetches all User mentions within the tweet and prints them
 		            	UserMentionEntity[] userList = status.getUserMentionEntities();
@@ -170,6 +170,15 @@ public class test1 implements Runnable
 							tweet.put("country", status.getPlace().getCountry());
 							tweet.put("lat", status.getGeoLocation().getLatitude());
 							tweet.put("long", status.getGeoLocation().getLongitude());
+						}
+						tweet.put("withheld-countries", status.getWithheldInCountries());
+						tweet.put("favorite", status.getFavoriteCount());
+						tweet.put("id", status.getId());
+						tweet.put("lang", status.getLang());
+						tweet.put("retweets", status.getRetweetCount());
+						tweet.put("source", status.getSource());
+						if(status.getQuotedStatus() != null) {
+							tweet.put("quoted-status", status.getQuotedStatus().getText());
 						}
 
 		            	int filesize = Integer.parseInt(args[0]);

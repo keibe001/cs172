@@ -17,3 +17,63 @@
 2018-06-04 14:33:08,488 [Worker-8] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/jiqingjerry/Documents/cs172/twitter-crawler/crawler/src/main/resources
 2018-06-04 14:33:08,490 [Worker-8] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2018-06-04 14:33:08,490 [Worker-8] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/jiqingjerry/Documents/cs172/twitter-crawler/crawler/src/test/resources
+2018-06-04 15:46:54,841 [Worker-2] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2018-06-04 15:46:56,408 [Worker-5] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.apache.lucene:lucene-queryparser:jar:7.3.0 is invalid, transitive dependencies (if any) will not be available, enable debug logging for more details
+2018-06-04 15:46:57,108 [Worker-5] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-06-04 15:46:57,109 [Worker-5] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/jiqingjerry/Documents/cs172/twitter-crawler/crawler/src/main/resources
+2018-06-04 15:46:57,113 [Worker-5] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-06-04 15:46:57,114 [Worker-5] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/jiqingjerry/Documents/cs172/twitter-crawler/crawler/src/test/resources
+2018-06-04 15:47:15,616 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-06-04 15:47:15,616 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/jiqingjerry/Documents/cs172/twitter-crawler/crawler/src/main/resources
+2018-06-04 15:47:15,620 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-06-04 15:47:15,621 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/jiqingjerry/Documents/cs172/twitter-crawler/crawler/src/test/resources
+2018-06-04 15:47:26,519 [Worker-15] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-06-04 15:47:26,520 [Worker-15] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/jiqingjerry/Documents/cs172/twitter-crawler/crawler/src/main/resources
+2018-06-04 15:47:26,522 [Worker-15] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-06-04 15:47:26,522 [Worker-15] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/jiqingjerry/Documents/cs172/twitter-crawler/crawler/src/test/resources
+2018-06-04 15:49:51,757 [Worker-5] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-06-04 15:49:51,757 [Worker-5] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/jiqingjerry/Documents/cs172/twitter-crawler/crawler/src/main/resources
+2018-06-04 15:49:51,765 [Worker-5] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-06-04 15:49:51,766 [Worker-5] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/jiqingjerry/Documents/cs172/twitter-crawler/crawler/src/test/resources
+2018-06-04 15:50:51,889 [Worker-8] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-06-04 15:50:51,890 [Worker-8] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/jiqingjerry/Documents/cs172/twitter-crawler/crawler/src/main/resources
+2018-06-04 15:50:51,891 [Worker-8] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-06-04 15:50:51,892 [Worker-8] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/jiqingjerry/Documents/cs172/twitter-crawler/crawler/src/test/resources
+2018-06-04 15:58:10,432 [Worker-10] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-06-04 15:58:10,435 [Worker-10] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/jiqingjerry/Documents/cs172/twitter-crawler/crawler/src/main/resources
+2018-06-04 15:58:10,437 [Worker-10] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-06-04 15:58:10,439 [Worker-10] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/jiqingjerry/Documents/cs172/twitter-crawler/crawler/src/test/resources
+2018-06-04 15:58:47,213 [Worker-8] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-06-04 15:58:47,213 [Worker-8] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/jiqingjerry/Documents/cs172/twitter-crawler/crawler/src/main/resources
+2018-06-04 15:58:47,214 [Worker-8] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-06-04 15:58:47,214 [Worker-8] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/jiqingjerry/Documents/cs172/twitter-crawler/crawler/src/test/resources
+2018-06-04 16:04:13,673 [Worker-20] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-06-04 16:04:13,674 [Worker-20] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/jiqingjerry/Documents/cs172/twitter-crawler/crawler/src/main/resources
+2018-06-04 16:04:13,676 [Worker-20] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-06-04 16:04:13,676 [Worker-20] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/jiqingjerry/Documents/cs172/twitter-crawler/crawler/src/test/resources
+2018-06-04 16:13:19,647 [Worker-10] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-06-04 16:13:19,648 [Worker-10] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/jiqingjerry/Documents/cs172/twitter-crawler/crawler/src/main/resources
+2018-06-04 16:13:19,649 [Worker-10] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-06-04 16:13:19,649 [Worker-10] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/jiqingjerry/Documents/cs172/twitter-crawler/crawler/src/test/resources
+2018-06-04 16:15:29,545 [Worker-22] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-06-04 16:15:29,546 [Worker-22] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/jiqingjerry/Documents/cs172/twitter-crawler/crawler/src/main/resources
+2018-06-04 16:15:29,548 [Worker-22] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-06-04 16:15:29,548 [Worker-22] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/jiqingjerry/Documents/cs172/twitter-crawler/crawler/src/test/resources
+2018-06-04 16:19:52,104 [Worker-10] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-06-04 16:19:52,105 [Worker-10] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/jiqingjerry/Documents/cs172/twitter-crawler/crawler/src/main/resources
+2018-06-04 16:19:52,106 [Worker-10] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-06-04 16:19:52,108 [Worker-10] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/jiqingjerry/Documents/cs172/twitter-crawler/crawler/src/test/resources
+2018-06-04 16:20:49,776 [Worker-22] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-06-04 16:20:49,777 [Worker-22] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/jiqingjerry/Documents/cs172/twitter-crawler/crawler/src/main/resources
+2018-06-04 16:20:49,779 [Worker-22] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-06-04 16:20:49,779 [Worker-22] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/jiqingjerry/Documents/cs172/twitter-crawler/crawler/src/test/resources
+2018-06-04 16:34:22,859 [Worker-24] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-06-04 16:34:22,860 [Worker-24] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/jiqingjerry/Documents/cs172/twitter-crawler/crawler/src/main/resources
+2018-06-04 16:34:22,862 [Worker-24] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-06-04 16:34:22,862 [Worker-24] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/jiqingjerry/Documents/cs172/twitter-crawler/crawler/src/test/resources
+2018-06-04 16:50:38,143 [Worker-1] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2018-06-04 16:53:52,630 [Worker-1] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.apache.lucene:lucene-queryparser:jar:7.3.0 is invalid, transitive dependencies (if any) will not be available, enable debug logging for more details
+2018-06-04 16:53:56,765 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-06-04 16:53:56,765 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/jiqingjerry/Documents/cs172/twitter-crawler/crawler/src/main/resources
+2018-06-04 16:53:56,766 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-06-04 16:53:56,766 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/jiqingjerry/Documents/cs172/twitter-crawler/crawler/src/test/resources

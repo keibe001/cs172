@@ -4,4 +4,15 @@
 		<item value="/home/jiqingjerry/Documents/cs172/twitter-crawler/crawler"/>
 		<item value="/home/jiqingjerry/Documents/cs172/twitter-crawler"/>
 	</list>
+	<section name="ExternalProjectImportWizard">
+		<item value="false" key="WizardProjectsImportPage.STORE_NESTED_PROJECTS"/>
+		<item value="false" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
+		<item value="false" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
+		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="/home/jiqingjerry/Documents/cs172/twitter-crawler/crawler"/>
+		</list>
+		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
+			<item value=""/>
+		</list>
+	</section>
 </section>
